@@ -9,7 +9,8 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:hive_flutter/hive_flutter.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:water_tracker/src/core/infrastructure/third_party_injectable_module.dart'
-    as _i7;
+    as _i8;
+import 'package:water_tracker/src/user/cubit/user_cubit.dart' as _i7;
 import 'package:water_tracker/src/user/model/user.dart' as _i4;
 import 'package:water_tracker/src/user/repository/i_user_repository.dart'
     as _i5;
@@ -35,8 +36,9 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.lazySingleton<_i5.IUserRepository>(
         () => _i6.UserRepository(gh<_i3.Box<_i4.User>>()));
+    gh.factory<_i7.UserCubit>(() => _i7.UserCubit(gh<_i5.IUserRepository>()));
     return this;
   }
 }
 
-class _$ThirdPartyInjectableModule extends _i7.ThirdPartyInjectableModule {}
+class _$ThirdPartyInjectableModule extends _i8.ThirdPartyInjectableModule {}
