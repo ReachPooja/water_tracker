@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 part 'user.g.dart';
 
 @HiveType(typeId: 1)
@@ -23,13 +24,10 @@ class User extends Equatable {
   @HiveField(3)
   final int bedTime;
 
+  static const empty = User();
+
   @override
-  List<Object> get props => [
-        gender,
-        weight,
-        wakeUpTime,
-        bedTime,
-      ];
+  List<Object> get props => [gender, weight, wakeUpTime, bedTime];
 
   User copyWith({
     String? gender,
