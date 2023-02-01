@@ -20,20 +20,18 @@ import 'package:water_tracker/src/user/repository/user_repository.dart' as _i6;
 /// ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
   /// initializes the registration of main-scope dependencies inside of [GetIt]
-  Future<_i1.GetIt> init({
+  _i1.GetIt init({
     String? environment,
     _i2.EnvironmentFilter? environmentFilter,
-  }) async {
+  }) {
     final gh = _i2.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
     final thirdPartyInjectableModule = _$ThirdPartyInjectableModule();
-    await gh.factoryAsync<_i3.Box<_i4.User>>(
-      () => thirdPartyInjectableModule.hive,
-      preResolve: true,
-    );
+    gh.lazySingleton<_i3.Box<_i4.User>>(
+        () => thirdPartyInjectableModule.userBox);
     gh.lazySingleton<_i5.IUserRepository>(
         () => _i6.UserRepository(gh<_i3.Box<_i4.User>>()));
     gh.factory<_i7.UserCubit>(() => _i7.UserCubit(gh<_i5.IUserRepository>()));

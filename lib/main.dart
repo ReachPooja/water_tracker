@@ -8,10 +8,11 @@ import 'package:water_tracker/src/user/model/user.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  configureInjector();
-
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
+  await Hive.openBox<User>('user');
+
+  configureInjector();
 
   await bootstrap(MyApp.new);
 }
