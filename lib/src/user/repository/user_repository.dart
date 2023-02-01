@@ -7,14 +7,13 @@ import 'package:water_tracker/src/user/repository/i_user_repository.dart';
 
 @LazySingleton(as: IUserRepository)
 class UserRepository extends IUserRepository {
-  UserRepository(this.box);
-
-  final Box<User> box;
+  UserRepository(this.userBox);
+  final Box<User> userBox;
 
   @override
   Future<Either<Failure, User>> getUserData() async {
     try {
-      final user = box.get('userData');
+      final user = userBox.get('userData');
 
       if (user == null) {
         return left(
@@ -36,7 +35,7 @@ class UserRepository extends IUserRepository {
     required User user,
   }) async {
     try {
-      await box.put('userData', user);
+      await userBox.put('userData', user);
       return right(unit);
     } catch (e) {
       return left(
