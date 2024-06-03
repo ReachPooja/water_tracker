@@ -13,11 +13,11 @@ Future<void> main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
+      configureInjector();
+
       await Hive.initFlutter();
       Hive.registerAdapter(UserAdapter());
       await Hive.openBox<User>('user');
-
-      configureInjector();
 
       await bootstrap(MyApp.new);
     },
